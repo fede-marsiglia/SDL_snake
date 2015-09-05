@@ -1,4 +1,4 @@
-#define draw_sys.h
+#include draw_sys.h
 
 struct draw_sys 
 def_draw_sys(void)
@@ -13,8 +13,8 @@ def_draw_sys(void)
 				  SDL_WINDOW_RESIZABLE);
 
 	ds.rend = SDL_CreateRenderer(ds.win, 0, SDL_RENDERER_ACCELERATED);
-	SDL_SetRenderDrawColor(ds.rend, 0, 0, 0, 0);	/* color is black */
-	SDL_RenderClear(ds);	/* paint window backgr in black */
+	SDL_SetRenderDrawColor(ds.rend, 0, 0, 0, 0);				/* color is black */
+	SDL_RenderClear(ds);				 			/* paint window backgr in black */
 
 	return ds;
 }
