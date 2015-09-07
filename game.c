@@ -36,13 +36,10 @@ game_start(struct game *g)
 		}
 		
 		move_snake(&g->snake);
-
 		if(g->snake.buff.st == FULL) 
 			add_block(&g->snake); 
-
 		if(eat_himself(&g->snake)) 
 			running = false;
-
 		SDL_Delay(50);
 	}
 }
