@@ -1,29 +1,23 @@
 #include <stdlib.h>
+#include "game.h"
 #include "food.h"
 
-struct food
+SDL_Rect
 food(void)
 {
-    struct food f;
+	SDL_Rect food;
 
-    f.symbol = '@';
-    f.pos.x = rand() % COLS;
-    f.pos.y = rand() % LINES;
+	food.x = 0;
+	food.y = 0;
+	food.w = 10;
+	food.h = 10;
 
-    return f;
+	return food;
 }
 
 void 
-move_food(struct food *f) 
+move_food(SDL_Rect *f) 
 {
-    f->pos.x = rand() % COLS;
-    f->pos.y = rand() % LINES;
-
-    mvaddch(f->pos.y, f->pos.x, f->symbol);
-}
-
-void
-draw_food(struct food *f)
-{
-       /* sdl code here */
+	f->x = rand() % DEF_WIN_WIDTH;
+	f->y = rand() % DEF_WIN_HEIGHT;
 }

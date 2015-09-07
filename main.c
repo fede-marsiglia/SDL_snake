@@ -1,30 +1,14 @@
-#include "msgs.h"
-#include "snake.h"
-#include "food.h"
-
-
-struct draw_sys ds = def_draw_sys();
+#include "game.h"
 
 int 
 main(void)
-{
-       struct snake s = snake();
-       struct food f = food();
+{ 
+       SDL_SetMainReady();
+       SDL_Init(SDL_INIT_VIDEO);	
 
-       while(1) {
-	       draw_scene(ds);
-
-	       move_snake(s);
-	       if(s->buff.st == FULL)
-		       add_block(s);
-
-	       if(eat(s->head, f->pos)) {
-		       queue_block(s);
-		       move_food(f);
-	       } 
-
-	       update_scene(ds, s, f);
-       }
+       struct game g = game();
+       game_start(&g);
+       free_resources(&g);
 
        SDL_Quit();
        return 0;

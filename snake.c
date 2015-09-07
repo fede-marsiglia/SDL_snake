@@ -1,19 +1,8 @@
 #include <stdlib.h> 
 #include "snake.h"
-
-void 
-init_snake_head(SDL_Rect *head) 
-{
-	int win_width, win_height;
-
-	SDL_GetWindowSize(ds.win, &win_width, &win_height);  // ds defined in main.c
-
-	head = malloc(sizeof(SDL_Rect) * s.max_len);
-	head->x = win_width / 2;
-	head->y = win_height / 2;
-	head->w = SNAKE_BLOCK_LEN;
-	head->h = SNAKE_BLOCK_LEN;
-}
+#include "food.h"
+#include "SDL2/SDL.h"
+#include "game.h"
 
 struct snake
 snake(void) 
@@ -23,7 +12,13 @@ snake(void)
 	s.len = SNAKE_INIT_LEN; 
 	s.max_len = SNAKE_INIT_MAX_LEN; 
 	s.buff.st = EMPTY;
-	init_snake_head(s.head);
+	s.dir = RIGHT;
+
+	s.head = (SDL_Rect*)malloc(sizeof(SDL_Rect) * s.max_len);
+	s.head->x = 0;
+	s.head->y = 0;
+	s.head->w = SNAKE_BLOCK_LEN;
+	s.head->h = SNAKE_BLOCK_LEN;
 
 	return s;
 }
@@ -38,29 +33,31 @@ extend(struct snake *s)
 }
 
 void
-move_snake(struct snake *s) // (!)
+move_snake(struct snake *s)
 {
-	SDL_Rect *block;
-		
-	block = s->head + s->len - 1; 	
-	for(; block != s->head; block--) 
-		*block = *(block - 1);
+	SDL_Rect *last;
+	last = s->head + s->len - 1;
+	
+	for(; last != s->head; last--)
+		*last = *(last-1);
 
-	switch(snake->dir) {
-
+	switch(s->dir) {
 	case UP:
-		head->y--;
+		(s->head->y) -= SNAKE_BLOCK_LEN;
 		break;
 	case DOWN:
-		head->y++;	
+		(s->head->y) += SNAKE_BLOCK_LEN;
 		break;
 	case LEFT:
-		head->x--;	
+		(s->head->x) -= SNAKE_BLOCK_LEN;
 		break;
 	case RIGHT:
-		head->x++;
+		(s->head->x) += SNAKE_BLOCK_LEN;
 		break;
 	}
+
+	s->head->x % DEF_WIN_WIDTH;
+	s->head->y % DEF_WIN_HEIGHT;
 }
 
 bool 
@@ -72,9 +69,12 @@ full(struct snake *s)
 void
 add_block(struct snake *s)
 {
+	if(full(s)) 
+		extend(s);
+
 	SDL_Rect *tail;
 		
-	tail = s->head + s->len - 1;
+	tail = s->head + s->len;
         *tail = s->buff.block;
 	s->buff.st = EMPTY;
 	s->len++; 
@@ -83,10 +83,25 @@ add_block(struct snake *s)
 void
 queue_block(struct snake *s) 
 {
-	SDL_Rect *tail = s->head + s->len - 1;
+	SDL_Rect *tail;
 
+	tail = s->head + s->len - 1;
 	s->buff.block = *tail;
 	s->buff.st = FULL;
 }
 
+bool
+eat_himself(struct snake *s) 
+{
+	int i;
+	for(i = 1; i < s->len; i++) 
+		if(SDL_HasIntersection(s->head, s->head+i))
+				return true; 
+	return false; 
+}
 
+SDL_bool 
+eat_food(struct snake *s, 
+	 SDL_Rect *f)
+{
+	return SDL_HasIntersection(s->head, f); }	

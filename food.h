@@ -1,21 +1,13 @@
 #ifndef FOOD
 #define FOOD
 
-#include "coord.h"
-
-struct food {
-       char	    	symbol; 
-       struct coord 	pos; 
-};
+#include <SDL2/SDL.h>
 
 
-struct food
-food( void );
+SDL_Rect
+food(void);
 
 void 
-move_food(struct food*); 
-
-void
-draw_food(struct food*);
+move_food(SDL_Rect *food); 
 
 #endif
