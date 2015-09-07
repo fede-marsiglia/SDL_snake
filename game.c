@@ -22,19 +22,15 @@ void
 game_start(struct game *g)
 {
 	bool running = true;
-
 	while(running) {
 		draw_screen(g);
-
 		while(SDL_PollEvent(&g->event))
 			if(snake_dir_change(&g->event))
 				g->snake.dir = g->event.key.keysym.sym;
-
 		if(eat_food(&g->snake, &g->food)) {
 			move_food(&g->food);
 			queue_block(&g->snake);
 		}
-		
 		move_snake(&g->snake);
 		if(g->snake.buff.st == FULL) 
 			add_block(&g->snake); 

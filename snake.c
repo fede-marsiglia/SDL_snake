@@ -13,7 +13,6 @@ snake(void)
 	s.max_len = SNAKE_INIT_MAX_LEN; 
 	s.buff.st = EMPTY;
 	s.dir = RIGHT;
-
 	s.head = (SDL_Rect*)malloc(sizeof(SDL_Rect) * s.max_len);
 	s.head->x = 0;
 	s.head->y = 0;
@@ -42,22 +41,19 @@ move_snake(struct snake *s)
 		*last = *(last-1);
 
 	switch(s->dir) {
-	case UP:
-		(s->head->y) -= SNAKE_BLOCK_LEN;
-		break;
-	case DOWN:
-		(s->head->y) += SNAKE_BLOCK_LEN;
-		break;
-	case LEFT:
-		(s->head->x) -= SNAKE_BLOCK_LEN;
-		break;
-	case RIGHT:
-		(s->head->x) += SNAKE_BLOCK_LEN;
-		break;
+		case UP:
+			(s->head->y) -= SNAKE_BLOCK_LEN;
+			break;
+		case DOWN:
+			(s->head->y) += SNAKE_BLOCK_LEN;
+			break;
+		case LEFT:
+			(s->head->x) -= SNAKE_BLOCK_LEN;
+			break;
+		case RIGHT:
+			(s->head->x) += SNAKE_BLOCK_LEN;
+			break;
 	}
-
-	s->head->x % DEF_WIN_WIDTH;
-	s->head->y % DEF_WIN_HEIGHT;
 }
 
 bool 
@@ -73,7 +69,6 @@ add_block(struct snake *s)
 		extend(s);
 
 	SDL_Rect *tail;
-		
 	tail = s->head + s->len;
         *tail = s->buff.block;
 	s->buff.st = EMPTY;
@@ -84,7 +79,6 @@ void
 queue_block(struct snake *s) 
 {
 	SDL_Rect *tail;
-
 	tail = s->head + s->len - 1;
 	s->buff.block = *tail;
 	s->buff.st = FULL;
@@ -104,4 +98,5 @@ SDL_bool
 eat_food(struct snake *s, 
 	 SDL_Rect *f)
 {
-	return SDL_HasIntersection(s->head, f); }	
+	return SDL_HasIntersection(s->head, f); 
+}

@@ -7,14 +7,10 @@ snake_dir_change(SDL_Event *e)
 {
 	if(e->type == SDL_KEYDOWN) 
 		switch(e->key.keysym.sym) {
-		case UP:
-			return true;
-		case DOWN:
-			return true;
-		case LEFT:
-			return true;
-		case RIGHT:
-			return true;
+			case UP: case DOWN: case LEFT: case RIGHT:
+				return true;
+			default:
+				return false;
 		}
 	return false;
 }	
