@@ -24,9 +24,11 @@ game_start(struct game *g)
 	bool running = true;
 	while(running) {
 		draw_screen(g);
+		
 		while(SDL_PollEvent(&g->event))
 			if(snake_dir_change(&g->event))
 				g->snake.dir = g->event.key.keysym.sym;
+		
 		if(eat_food(&g->snake, &g->food)) {
 			move_food(&g->food);
 			queue_block(&g->snake);
@@ -36,6 +38,7 @@ game_start(struct game *g)
 			add_block(&g->snake); 
 		if(eat_himself(&g->snake)) 
 			running = false;
+			
 		SDL_Delay(50);
 	}
 }
