@@ -18,7 +18,7 @@ take a snapshot of the last snake's block (we only need Its coordinate really) a
 After that cycle, the buffer is flushed, meaning that a new block is added to the snake, which is placed in the same 
 spot where the old tail was lying. The reason is that, when the snake eats something, we cannot directly add a block
 to his body, cause we could not know where to place it (above/below the last block, to his left/right?) so we decide to wait
-one cycle and put it where the last piece was placed one cycle ago...And that's it
+one cycle and put it where the last piece was placed one cycle ago...And that's it!
 
 The rest of the implementation should be straightforward and easy to follow, so I will not spend any word commenting it
 (let me know if you have troubles of course and I will fix this document).
