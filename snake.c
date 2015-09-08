@@ -41,18 +41,19 @@ move_snake(struct snake *s)
 		*last = *(last-1);
 
 	switch(s->dir) {
-		case UP:
-			(s->head->y) -= SNAKE_BLOCK_LEN;
-			break;
-		case DOWN:
-			(s->head->y) += SNAKE_BLOCK_LEN;
-			break;
-		case LEFT:
-			(s->head->x) -= SNAKE_BLOCK_LEN;
-			break;
-		case RIGHT:
-			(s->head->x) += SNAKE_BLOCK_LEN;
-			break;
+
+	case UP:
+		(s->head->y) -= SNAKE_BLOCK_LEN;
+		break;
+	case DOWN:
+		(s->head->y) += SNAKE_BLOCK_LEN;
+		break;
+	case LEFT:
+		(s->head->x) -= SNAKE_BLOCK_LEN;
+		break;
+	case RIGHT:
+		(s->head->x) += SNAKE_BLOCK_LEN;
+		break;
 	}
 }
 
@@ -65,7 +66,7 @@ full(struct snake *s)
 void
 add_block(struct snake *s)
 {
-	if(full(s)) 
+	if(is_full(s)) 
 		extend(s);
 
 	SDL_Rect *tail;
