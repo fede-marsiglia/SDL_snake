@@ -7,11 +7,12 @@ I tried to polish the implementation and structure of the game as much as I coul
 allow every c newbie out there (more like every programming newbie) to have a taste of a structured program of 
 little dimensions (but yet larger and more complex than every textbook exercise) without having his head explode.
 
-Talking about the implementation, there are few core data strutures which make up the game or are worth noting:
+Talking about the implementation, there are few core data strutures which make up the game or are worth noting;
+they are placed like a tree to let you visualize their Ierarchy:
 
-- struct snake
-- struct food 
-- struct buffer
+                      struct game
+        struct snake  struct food   SDL_Window + renderer
+    struct buffer 
 
 the last structure is the snake's internal buffer, which is used every time he eats some food. It's role is to
 take a snapshot of the last snake's block (we only need Its coordinate really) and maintain it for a game cycle.
