@@ -15,7 +15,7 @@ they are placed like a tree to let you visualize their Ierarchy:
     struct buffer 
 
 the last structure is the snake's internal buffer, which is used every time he eats some food. It's role is to
-take a snapshot of the last snake's block (we only need Its coordinate really) and maintain it for a game cycle.
+take a snapshot of the last snake's block and maintain it for a game cycle.
 After that cycle, the buffer is flushed, meaning that a new block is added to the snake, which is placed in the same 
 spot where the old tail was lying. The reason is that, when the snake eats something, we cannot directly add a block
 to his body, cause we could not know where to place it (above/below the last block, to his left/right?) so we decide to wait
