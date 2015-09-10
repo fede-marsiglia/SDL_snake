@@ -3,7 +3,7 @@ A simple SDL 2.0 snake clone written in C
 
 as the title states, this is a simple snake clone written in C, with a lightweight use of the SDL 2.0 libraries. The scope of
 this project was to create something big enough to use the C language in nearly all its aspects, but not outrageously big. 
-I tried to polish the implementation and structure of the game as much as I could, firstly for an ethical reason, and secondly to 
+I tried to polish the implementation and structure of the game as much as I could to 
 allow every c newbie out there (more like every programming newbie) to have a taste of a structured program of 
 little dimensions (but yet larger and more complex than every textbook exercise) without having his head explode.
 
